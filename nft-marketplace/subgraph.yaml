@@ -1,0 +1,24 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: NftMarket
+    network: rinkeby
+    source:
+      address: "0xaca869D034749C0dDB4952b3f23C05d68dd91cf9"
+      abi: NftMarket
+      startBlock: 11051537
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - NFTTransfer
+      abis:
+        - name: NftMarket
+          file: ./abis/NftMarket.json
+      eventHandlers:
+        - event: NFTTransfer(uint256,address,address,string,uint256)
+          handler: handleNFTTransfer
+      file: ./src/nft-market.ts
